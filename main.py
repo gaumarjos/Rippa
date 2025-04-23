@@ -4,8 +4,9 @@ import settings_lib
 import colorama
 from ripper import Ripper
 import helper
+import caffeine
 
-VERSION = "2025-01-17"
+VERSION = "2025-04-23"
 DRYRUN = False
 
 current_path = helper.get_current_path()
@@ -51,4 +52,7 @@ def main():
 if __name__ == "__main__":
     if not os.path.exists(os.path.join(current_path, "settings.json")):
         settings_lib.create_settings()
+    caffeine.on(display=False)  # Keeps system awake, allows display to sleep
     main()
+    caffeine.off()  # Release the assertion before exiting
+
